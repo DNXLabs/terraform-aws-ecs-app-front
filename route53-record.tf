@@ -13,6 +13,8 @@ resource "aws_route53_record" "hostname" {
 }
 
 resource "aws_route53_record" "hostname_blue" {
+  count   = var.hostname_create ? 1 : 0
+  
   zone_id = data.aws_route53_zone.selected.zone_id
   name    = var.hostname_blue
   type    = "CNAME"
