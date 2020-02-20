@@ -19,7 +19,7 @@ resource "aws_cloudfront_distribution" "default" {
 
     custom_header {
       name  = "fromcloudfront"
-      value = "${var.alb_cloudfront_key}"
+      value = var.alb_cloudfront_key
     }
   }
 
@@ -56,5 +56,5 @@ resource "aws_cloudfront_distribution" "default" {
     }
   }
 
-  web_acl_id = "${var.cloudfront_web_acl_id != "" ? var.cloudfront_web_acl_id : ""}"
+  web_acl_id = var.cloudfront_web_acl_id != "" ? var.cloudfront_web_acl_id : ""
 }
