@@ -23,6 +23,16 @@ resource "aws_cloudfront_distribution" "default" {
     }
   }
 
+  dynamic "logging_config" {
+    for_each = compact([var.cloudfront_logging_bucket])
+
+    content {
+      include_cookies = false
+      bucket          = var.cloudfront_logging_bucket
+      prefix          = var.cloudfront_logging_prefix
+    }
+  }
+
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"]

@@ -41,3 +41,15 @@ variable "cloudfront_forward_headers" {
   default     = ["*"]
   description = "Headers to forward to origin from CloudFront"
 }
+
+variable "cloudfront_logging_bucket" {
+  type        = string
+  default     = null
+  description = "Bucket to store logs from app"
+}
+
+variable "cloudfront_logging_prefix" {
+  type        = string
+  default     = ""
+  description = "Logging prefix"
+}
