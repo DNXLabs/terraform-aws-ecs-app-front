@@ -1,3 +1,11 @@
+variable "name" {
+  description = "Name of your ECS service"
+}
+
+variable "cluster_name" {
+  default = "Name of existing ECS Cluster to deploy this app to"
+}
+
 variable "hostname" {
   description = "Hostname to create DNS record for this app"
 }
@@ -52,4 +60,14 @@ variable "cloudfront_logging_prefix" {
   type        = string
   default     = ""
   description = "Logging prefix"
+}
+
+variable "alarm_cloudfront_500_errors_threshold" {
+  default     = 5
+  description = "Cloudfront 500 Errors rate threshold (use 0 to disable this alarm)"
+}
+
+variable "alarm_sns_topics_us" {
+  default     = []
+  description = "Alarm topics to create and alert on metrics on US region"
 }
