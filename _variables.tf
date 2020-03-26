@@ -10,10 +10,6 @@ variable "hostname" {
   description = "Hostname to create DNS record for this app"
 }
 
-variable "hostname_blue" {
-  description = "Blue hostname for testing the app"
-}
-
 variable "hostname_create" {
   description = "Create hostname in the hosted zone passed?"
   default     = true
@@ -37,7 +33,7 @@ variable "alb_dns_name" {
 }
 
 variable "certificate_arn" {
-  description = "Certificate for this app to use in CloudFront (US), must cover `hostname` and (ideally) `hostname_blue` passed."
+  description = "Certificate for this app to use in CloudFront (US), must cover `hostname`."
 }
 
 variable "cloudfront_web_acl_id" {
