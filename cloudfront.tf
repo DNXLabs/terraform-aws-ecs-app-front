@@ -11,10 +11,12 @@ resource "aws_cloudfront_distribution" "default" {
     origin_id   = "default"
 
     custom_origin_config {
-      origin_protocol_policy = "https-only"
-      http_port              = 80
-      https_port             = 443
-      origin_ssl_protocols   = ["SSLv3", "TLSv1.1", "TLSv1.2", "TLSv1"]
+      origin_protocol_policy   = "https-only"
+      http_port                = 80
+      https_port               = 443
+      origin_ssl_protocols     = ["SSLv3", "TLSv1.1", "TLSv1.2", "TLSv1"]
+      origin_keepalive_timeout = var.cloudfront_origin_keepalive_timeout
+      origin_read_timeout      = var.cloudfront_origin_read_timeout
     }
 
     custom_header {

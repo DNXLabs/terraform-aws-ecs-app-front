@@ -58,6 +58,16 @@ variable "cloudfront_logging_prefix" {
   description = "Logging prefix"
 }
 
+variable "cloudfront_origin_keepalive_timeout" {
+  default     = 5
+  description = "The amount of time, in seconds, that CloudFront maintains an idle connection with a custom origin server before closing the connection. Valid values are from 1 to 60 seconds."
+}
+
+variable "cloudfront_origin_read_timeout" {
+  default     = 60
+  description = "The amount of time, in seconds, that CloudFront waits for a response from a custom origin. The value applies both to the time that CloudFront waits for an initial response and the time that CloudFront waits for each subsequent packet. Valid values are from 4 to 60 seconds."
+}
+
 variable "alarm_cloudfront_500_errors_threshold" {
   default     = 5
   description = "Cloudfront 500 Errors rate threshold (use 0 to disable this alarm)"
