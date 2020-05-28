@@ -34,7 +34,7 @@ This module is designed to be used with `DNXLabs/terraform-aws-ecs` and `DNXLabs
 | cloudfront\_logging\_bucket | Bucket to store logs from app | `string` | `null` | no |
 | cloudfront\_logging\_prefix | Logging prefix | `string` | `""` | no |
 | cloudfront\_origin\_keepalive\_timeout | The amount of time, in seconds, that CloudFront maintains an idle connection with a custom origin server before closing the connection. Valid values are from 1 to 60 seconds. | `number` | `5` | no |
-| cloudfront\_origin\_read\_timeout | The amount of time, in seconds, that CloudFront waits for a response from a custom origin. The value applies both to the time that CloudFront waits for an initial response and the time that CloudFront waits for each subsequent packet. Valid values are from 4 to 60 seconds. | `number` | `60` | no |
+| cloudfront\_origin\_read\_timeout | The amount of time, in seconds, that CloudFront waits for a response from a custom origin. The value applies both to the time that CloudFront waits for an initial response and the time that CloudFront waits for each subsequent packet. Valid values are from 4 to 60 seconds. | `number` | `30` | no |
 | cloudfront\_web\_acl\_id | Optional web acl (WAF) to attach to CloudFront | `string` | `""` | no |
 | cluster\_name | Name of existing ECS Cluster to deploy this app to | `any` | n/a | yes |
 | dynamic\_custom\_origin\_config | Configuration for the custom origin config to be used in dynamic block | `any` | `[]` | no |
