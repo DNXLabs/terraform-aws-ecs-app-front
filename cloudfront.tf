@@ -25,6 +25,53 @@ resource "aws_cloudfront_distribution" "default" {
     }
   }
 
+  dynamic "origin" {
+    for_each = [for i in var.dynamic_custom_origin_config : {
+      domain_name              = i.domain_name
+      origin_id                = i.origin_id != "" ? i.origin_id : "default"
+      path                     = lookup(i, "origin_path", null)
+      http_port                = i.http_port != "" ? i.http_port : 80
+      https_port               = i.https_port != "" ? i.https_port : 443
+      origin_protocol_policy   = i.origin_protocol_policy != "" ? i.origin_protocol_policy : "https-only"
+      origin_read_timeout      = i.origin_read_timeout
+      origin_keepalive_timeout = i.origin_keepalive_timeout
+      origin_ssl_protocols     = lookup(i, "origin_ssl_protocols", ["SSLv3", "TLSv1.1", "TLSv1.2", "TLSv1"])
+      custom_header            = lookup(i, "custom_header", null)
+    }]
+
+    content {
+      domain_name = origin.value.domain_name
+      origin_id   = origin.value.origin_id
+      origin_path = origin.value.path
+
+      dynamic "custom_header" {
+        for_each = origin.value.custom_header == null ? [] : [for i in origin.value.custom_header : {
+          name  = i.name
+          value = i.value
+        }]
+        content {
+          name  = custom_header.value.name
+          value = custom_header.value.value
+        }
+      }
+
+      custom_header {
+        name  = "fromcloudfront"
+        value = var.alb_cloudfront_key
+      }
+
+      custom_origin_config {
+        http_port                = origin.value.http_port
+        https_port               = origin.value.https_port
+        origin_keepalive_timeout = origin.value.origin_keepalive_timeout
+        origin_read_timeout      = origin.value.origin_read_timeout
+        origin_protocol_policy   = origin.value.origin_protocol_policy
+        origin_ssl_protocols     = origin.value.origin_ssl_protocols
+      }
+
+    }
+  }
+
   dynamic "logging_config" {
     for_each = compact([var.cloudfront_logging_bucket])
 
@@ -56,15 +103,54 @@ resource "aws_cloudfront_distribution" "default" {
     max_ttl                = 86400
   }
 
+  dynamic "ordered_cache_behavior" {
+    for_each = var.dynamic_ordered_cache_behavior
+    iterator = cache_behavior
+
+    content {
+      path_pattern     = cache_behavior.value.path_pattern
+      allowed_methods  = cache_behavior.value.allowed_methods
+      cached_methods   = cache_behavior.value.cached_methods
+      target_origin_id = cache_behavior.value.target_origin_id
+      compress         = lookup(cache_behavior.value, "compress", null)
+
+      forwarded_values {
+        query_string = cache_behavior.value.query_string
+        cookies {
+          forward = cache_behavior.value.cookies_forward
+        }
+        headers = lookup(cache_behavior.value, "headers", null)
+      }
+
+      dynamic "lambda_function_association" {
+        iterator = lambda
+        for_each = lookup(cache_behavior.value, "lambda_function_association", [])
+        content {
+          event_type   = lambda.value.event_type
+          lambda_arn   = lambda.value.lambda_arn
+          include_body = lookup(lambda.value, "include_body", null)
+        }
+      }
+
+      viewer_protocol_policy = cache_behavior.value.viewer_protocol_policy
+      min_ttl                = lookup(cache_behavior.value, "min_ttl", null)
+      default_ttl            = lookup(cache_behavior.value, "default_ttl", null)
+      max_ttl                = lookup(cache_behavior.value, "max_ttl", null)
+    }
+  }
+
   viewer_certificate {
-    acm_certificate_arn      = var.certificate_arn
-    ssl_support_method       = "sni-only"
-    minimum_protocol_version = "TLSv1.1_2016"
+    acm_certificate_arn            = var.certificate_arn
+    iam_certificate_id             = var.iam_certificate_id
+    cloudfront_default_certificate = var.certificate_arn == null && var.iam_certificate_id == null ? true : false
+    ssl_support_method             = var.certificate_arn == null && var.iam_certificate_id == null ? null : "sni-only"
+    minimum_protocol_version       = var.certificate_arn == null && var.iam_certificate_id == null ? "TLSv1.2_2018" : var.minimum_protocol_version
   }
 
   restrictions {
     geo_restriction {
-      restriction_type = "none"
+      restriction_type = var.restriction_type
+      locations        = var.restriction_location
     }
   }
 
