@@ -7,14 +7,14 @@ AWS ECS Application Module (frontend component)
 
 This module is designed to be used with `DNXLabs/terraform-aws-ecs` and `DNXLabs/terraform-aws-ecs-app`.
 
-## Inputs
-
+<!--- BEGIN_TF_DOCS --->
+<!--- END_TF_DOCS --->
 
 
 ## Authors
 
-Module managed by [Allan Denot](https://github.com/adenot).
+Module managed by [DNX Solutions](https://github.com/DNXLabs).
 
 ## License
 
-Apache 2 Licensed. See LICENSE for full details.
+Apache 2 Licensed. See [LICENSE](https://github.com/DNXLabs/terraform-aws-ecs-app-front/blob/master/LICENSE) for full details.
