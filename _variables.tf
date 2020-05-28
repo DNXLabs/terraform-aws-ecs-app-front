@@ -64,7 +64,7 @@ variable "cloudfront_origin_keepalive_timeout" {
 }
 
 variable "cloudfront_origin_read_timeout" {
-  default     = 60
+  default     = 30
   description = "The amount of time, in seconds, that CloudFront waits for a response from a custom origin. The value applies both to the time that CloudFront waits for an initial response and the time that CloudFront waits for each subsequent packet. Valid values are from 4 to 60 seconds."
 }
 
