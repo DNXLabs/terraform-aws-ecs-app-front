@@ -6,22 +6,17 @@ variable "cluster_name" {
   description = "Name of existing ECS Cluster to deploy this app to"
 }
 
-variable "hostname" {
-  description = "Hostname to create DNS record for this app"
+variable "hostnames" {
+  description = "Hostnames to create DNS record for this app that the cloudfront distribution will accept"
 }
 
 variable "hostname_create" {
-  description = "Create hostname in the hosted zone passed?"
+  description = "Create hostnames in the hosted zone passed?"
   default     = true
 }
 
 variable "hosted_zone" {
   description = "Existing Hosted Zone domain to add hostnames as DNS records"
-}
-
-variable "hostname_redirects" {
-  description = "List of hostnames to redirect to the main one, comma-separated"
-  default     = ""
 }
 
 variable "alb_cloudfront_key" {

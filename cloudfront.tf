@@ -1,8 +1,8 @@
 resource "aws_cloudfront_distribution" "default" {
   enabled             = true
   is_ipv6_enabled     = true
-  comment             = var.hostname
-  aliases             = concat(list(var.hostname), compact(split(",", var.hostname_redirects)))
+  comment             = join(", ", var.hostnames)
+  aliases             = var.hostnames
   price_class         = "PriceClass_All"
   wait_for_deployment = false
 
