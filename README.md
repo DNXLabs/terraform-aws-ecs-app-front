@@ -13,7 +13,7 @@ This module is designed to be used with `DNXLabs/terraform-aws-ecs` and `DNXLabs
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.20 |
+| terraform | >= 0.12.0 |
 
 ## Providers
 
