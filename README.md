@@ -3,9 +3,9 @@
 [![Lint Status](https://github.com/DNXLabs/terraform-aws-ecs-app-front/workflows/Lint/badge.svg)](https://github.com/DNXLabs/terraform-aws-ecs-app-front/actions)
 [![LICENSE](https://img.shields.io/github/license/DNXLabs/terraform-aws-ecs-app-front)](https://github.com/DNXLabs/terraform-aws-ecs-app-front/blob/master/LICENSE)
 
-This terraform module is an AWS ECS Application Module (frontend component)
+This terraform module is an AWS ECS Application Module (frontend component).
 
-It's designed to be used with `DNXLabs/terraform-aws-ecs` (https://github.com/DNXLabs/terraform-aws-ecs). and `DNXLabs/terraform-aws-ecs-app` (https://github.com/DNXLabs/terraform-aws-ecs-app) .
+It's designed to be used with `DNXLabs/terraform-aws-ecs` (https://github.com/DNXLabs/terraform-aws-ecs). and `DNXLabs/terraform-aws-ecs-app` (https://github.com/DNXLabs/terraform-aws-ecs-app).
 
 The following resources will be created:
 
