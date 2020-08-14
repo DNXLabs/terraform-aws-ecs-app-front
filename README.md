@@ -15,7 +15,8 @@ The following resources will be created:
  - Certificate Amazon Resource Name (ARN) - Certificate for this app to use in CloudFront (US), must cover hostname.
  - Cloudwatch Log Groups
 
-In addition you have the option to create or not :
+In addition you have the option to create or not:
+
  - Cloudfront 500 Errors rate threshold
  - Simple Notification Service (SNS) topic United States (US) - Alarm topics to create and alert on metrics on US region
  - Cloudfront forward headers - Headers to forward to origin from CloudFront
@@ -25,8 +26,9 @@ In addition you have the option to create or not :
  - Web Application Firewall (WAF) to attach to Cloudfront
  - IAM Certificate ID - Specifies IAM certificate id for CloudFront distribution
  - Minimum protocol version - The minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections.
-One of SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016 or TLSv1.2_2018. Default: TLSv1.2_2018.
-NOTE: If you are using a custom certificate (specified with acm_certificate_arn or iam_certificate_id),and have specified sni-only in ssl_support_method, TLSv1 or later must be specified.
+ - One of SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016 or TLSv1.2_2018. Default: TLSv1.2_2018.
+ 
+> NOTE: If you are using a custom certificate (specified with acm_certificate_arn or iam_certificate_id),and have specified sni-only in ssl_support_method, TLSv1 or later must be specified.
 If you have specified vip in ssl_support_method, only SSLv3 or TLSv1 can be specified.
 If you have specified cloudfront_default_certificate, TLSv1 must be specified.
 
