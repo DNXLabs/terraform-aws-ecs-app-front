@@ -27,6 +27,7 @@ resource "aws_cloudfront_distribution" "default" {
 
   dynamic "origin" {
     for_each = [for i in var.dynamic_custom_origin_config : {
+      s3                       = lookup(i, "s3", false)
       domain_name              = i.domain_name
       origin_id                = i.origin_id != "" ? i.origin_id : "default"
       path                     = lookup(i, "origin_path", null)
@@ -60,13 +61,16 @@ resource "aws_cloudfront_distribution" "default" {
         value = var.alb_cloudfront_key
       }
 
-      custom_origin_config {
-        http_port                = origin.value.http_port
-        https_port               = origin.value.https_port
-        origin_keepalive_timeout = origin.value.origin_keepalive_timeout
-        origin_read_timeout      = origin.value.origin_read_timeout
-        origin_protocol_policy   = origin.value.origin_protocol_policy
-        origin_ssl_protocols     = origin.value.origin_ssl_protocols
+      dynamic "custom_origin_config" {
+        for_each = origin.value.s3 == true ? [] : [1]
+        content {
+          http_port                = origin.value.http_port
+          https_port               = origin.value.https_port
+          origin_keepalive_timeout = origin.value.origin_keepalive_timeout
+          origin_read_timeout      = origin.value.origin_read_timeout
+          origin_protocol_policy   = origin.value.origin_protocol_policy
+          origin_ssl_protocols     = origin.value.origin_ssl_protocols
+        }
       }
 
     }
