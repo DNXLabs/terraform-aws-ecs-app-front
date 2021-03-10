@@ -38,6 +38,7 @@ resource "aws_cloudfront_distribution" "default" {
       origin_keepalive_timeout = i.origin_keepalive_timeout
       origin_ssl_protocols     = lookup(i, "origin_ssl_protocols", ["SSLv3", "TLSv1.1", "TLSv1.2", "TLSv1"])
       custom_header            = lookup(i, "custom_header", null)
+      origin_access_identity   = lookup(i, "origin_access_identity", "")
     }]
 
     content {
@@ -59,6 +60,13 @@ resource "aws_cloudfront_distribution" "default" {
       custom_header {
         name  = "fromcloudfront"
         value = var.alb_cloudfront_key
+      }
+
+      dynamic s3_origin_config {
+        for_each = origin.value.s3 == true ? [1] : []
+        content {
+          origin_access_identity = origin.value.origin_access_identity
+        }
       }
 
       dynamic "custom_origin_config" {
