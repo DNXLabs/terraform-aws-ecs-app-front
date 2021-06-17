@@ -73,13 +73,13 @@ variable "alarm_sns_topics_us" {
   description = "Alarm topics to create and alert on metrics on US region"
 }
 
-variable iam_certificate_id {
+variable "iam_certificate_id" {
   description = "Specifies IAM certificate id for CloudFront distribution"
   type        = string
   default     = null
 }
 
-variable minimum_protocol_version {
+variable "minimum_protocol_version" {
   description = <<EOF
     The minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections. 
     One of SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016 or TLSv1.2_2018. Default: TLSv1.2_2018. 
@@ -93,25 +93,25 @@ variable minimum_protocol_version {
   default = "TLSv1.2_2018"
 }
 
-variable restriction_type {
+variable "restriction_type" {
   description = "The restriction type of your CloudFront distribution geolocation restriction. Options include none, whitelist, blacklist"
   type        = string
   default     = "none"
 }
 
-variable restriction_location {
+variable "restriction_location" {
   description = "The ISO 3166-1-alpha-2 codes for which you want CloudFront either to distribute your content (whitelist) or not distribute your content (blacklist)"
-  type        = list
+  type        = list(any)
   default     = []
 }
 
-variable dynamic_custom_origin_config {
+variable "dynamic_custom_origin_config" {
   description = "Configuration for the custom origin config to be used in dynamic block"
   type        = any
   default     = []
 }
 
-variable dynamic_ordered_cache_behavior {
+variable "dynamic_ordered_cache_behavior" {
   description = "Ordered Cache Behaviors to be used in dynamic block"
   type        = any
   default     = []

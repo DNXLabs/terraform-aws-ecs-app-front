@@ -62,7 +62,7 @@ resource "aws_cloudfront_distribution" "default" {
         value = var.alb_cloudfront_key
       }
 
-      dynamic s3_origin_config {
+      dynamic "s3_origin_config" {
         for_each = origin.value.s3 == true ? [1] : []
         content {
           origin_access_identity = origin.value.origin_access_identity
