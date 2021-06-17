@@ -9,6 +9,5 @@ resource "aws_route53_record" "hostname" {
   name    = var.hostnames[count.index]
   type    = "CNAME"
   ttl     = "300"
-  records = list(element(aws_cloudfront_distribution.default.*.domain_name, 0))
+  records = [element(aws_cloudfront_distribution.default.*.domain_name, 0)]
 }
-
