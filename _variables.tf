@@ -116,3 +116,18 @@ variable "dynamic_ordered_cache_behavior" {
   type        = any
   default     = []
 }
+
+variable "default_cache_behavior_forward_query_string" {
+  default     = true
+  description = "Default cache behavior forward"
+}
+
+variable "default_cache_behavior_cookies_forward" {
+  default     = "all"
+  description = "Default cache behavior cookies forward"
+}
+
+variable "default_cache_behavior_allowed_methods" {
+  default     = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+  description = "Methods allowed for default origin cache behavior"
+}
