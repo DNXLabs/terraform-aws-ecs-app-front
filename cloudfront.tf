@@ -101,6 +101,8 @@ resource "aws_cloudfront_distribution" "default" {
 
     origin_request_policy_id = var.default_cache_behavior_origin_request_policy_id
     cache_policy_id          = var.default_cache_behavior_cache_policy
+    
+    viewer_protocol_policy = "redirect-to-https"
   }
 
   dynamic "ordered_cache_behavior" {
