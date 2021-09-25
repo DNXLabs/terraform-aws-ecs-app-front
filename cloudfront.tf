@@ -98,20 +98,9 @@ resource "aws_cloudfront_distribution" "default" {
     allowed_methods  = var.default_cache_behavior_allowed_methods
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "default"
-    compress         = true
 
-    forwarded_values {
-      query_string = var.default_cache_behavior_forward_query_string
-      headers      = var.cloudfront_forward_headers
-      cookies {
-        forward = var.default_cache_behavior_cookies_forward
-      }
-    }
-    
-    viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
+    origin_request_policy_id = var.default_cache_behavior_origin_request_policy_id
+    cache_policy_id          = var.default_cache_behavior_cache_policy
   }
 
   dynamic "ordered_cache_behavior" {

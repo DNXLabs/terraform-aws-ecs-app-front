@@ -117,17 +117,17 @@ variable "dynamic_ordered_cache_behavior" {
   default     = []
 }
 
-variable "default_cache_behavior_forward_query_string" {
-  default     = true
-  description = "Default cache behavior forward"
-}
-
-variable "default_cache_behavior_cookies_forward" {
-  default     = "all"
-  description = "Default cache behavior cookies forward"
-}
-
 variable "default_cache_behavior_allowed_methods" {
   default     = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
   description = "Methods allowed for default origin cache behavior"
+}
+
+variable "default_cache_behavior_origin_request_policy_id" {
+  default     = "216adef6-5c7f-47e4-b989-5492eafa07d3"
+  description = "The unique identifier of the origin request policy that is attached to the behavior. (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html)"
+}
+
+variable "default_cache_behavior_cache_policy" {
+  default     = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+  description = "The unique identifier of the cache policy that is attached to the cache behavior. (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html) "
 }
