@@ -116,14 +116,6 @@ resource "aws_cloudfront_distribution" "default" {
       target_origin_id = cache_behavior.value.target_origin_id
       compress         = lookup(cache_behavior.value, "compress", null)
 
-      forwarded_values {
-        query_string = cache_behavior.value.query_string
-        cookies {
-          forward = cache_behavior.value.cookies_forward
-        }
-        headers = lookup(cache_behavior.value, "headers", null)
-      }
-
       dynamic "lambda_function_association" {
         iterator = lambda
         for_each = lookup(cache_behavior.value, "lambda_function_association", [])
@@ -133,6 +125,9 @@ resource "aws_cloudfront_distribution" "default" {
           include_body = lookup(lambda.value, "include_body", null)
         }
       }
+
+      origin_request_policy_id = cache_behavior.value.request_policy_id
+      cache_policy_id          = cache_behavior.value.cache_policy
 
       viewer_protocol_policy = cache_behavior.value.viewer_protocol_policy
       min_ttl                = lookup(cache_behavior.value, "min_ttl", null)
