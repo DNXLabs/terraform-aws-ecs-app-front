@@ -98,6 +98,7 @@ resource "aws_cloudfront_distribution" "default" {
     allowed_methods  = var.default_cache_behavior_allowed_methods
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "default"
+    compress         = try(var.default_cache_behavior_compress, false)
 
     origin_request_policy_id = var.default_cache_behavior_origin_request_policy_id
     cache_policy_id          = var.default_cache_behavior_cache_policy
@@ -114,7 +115,7 @@ resource "aws_cloudfront_distribution" "default" {
       allowed_methods  = cache_behavior.value.allowed_methods
       cached_methods   = cache_behavior.value.cached_methods
       target_origin_id = cache_behavior.value.target_origin_id
-      compress         = lookup(cache_behavior.value, "compress", null)
+      compress         = try(cache_behavior.value.compress, false)
 
       dynamic "lambda_function_association" {
         iterator = lambda

@@ -131,3 +131,8 @@ variable "default_cache_behavior_cache_policy" {
   default     = "658327ea-f89d-4fab-a63d-7e88639e58f6"
   description = "The unique identifier of the cache policy that is attached to the cache behavior. (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html) "
 }
+
+variable "default_cache_behavior_compress" {
+  default     = false
+  description = "Whether you want CloudFront to automatically compress content for web requests"
+}
