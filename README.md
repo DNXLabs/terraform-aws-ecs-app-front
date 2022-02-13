@@ -63,6 +63,10 @@ If you have specified cloudfront_default_certificate, TLSv1 must be specified.
 | cloudfront\_origin\_read\_timeout | The amount of time, in seconds, that CloudFront waits for a response from a custom origin. The value applies both to the time that CloudFront waits for an initial response and the time that CloudFront waits for each subsequent packet. Valid values are from 4 to 60 seconds. | `number` | `30` | no |
 | cloudfront\_web\_acl\_id | Optional web acl (WAF) to attach to CloudFront | `string` | `""` | no |
 | cluster\_name | Name of existing ECS Cluster to deploy this app to | `any` | n/a | yes |
+| default\_cache\_behavior\_allowed\_methods | Methods allowed for default origin cache behavior | `list` | <pre>[<br>  "DELETE",<br>  "GET",<br>  "HEAD",<br>  "OPTIONS",<br>  "PATCH",<br>  "POST",<br>  "PUT"<br>]</pre> | no |
+| default\_cache\_behavior\_cache\_policy | The unique identifier of the cache policy that is attached to the cache behavior. (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html) | `string` | `"658327ea-f89d-4fab-a63d-7e88639e58f6"` | no |
+| default\_cache\_behavior\_compress | Whether you want CloudFront to automatically compress content for web requests | `bool` | `false` | no |
+| default\_cache\_behavior\_origin\_request\_policy\_id | The unique identifier of the origin request policy that is attached to the behavior. (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html) | `string` | `"216adef6-5c7f-47e4-b989-5492eafa07d3"` | no |
 | dynamic\_custom\_origin\_config | Configuration for the custom origin config to be used in dynamic block | `any` | `[]` | no |
 | dynamic\_ordered\_cache\_behavior | Ordered Cache Behaviors to be used in dynamic block | `any` | `[]` | no |
 | hosted\_zone | Existing Hosted Zone domain to add hostnames as DNS records | `any` | n/a | yes |
