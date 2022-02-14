@@ -136,3 +136,9 @@ variable "default_cache_behavior_compress" {
   default     = false
   description = "Whether you want CloudFront to automatically compress content for web requests"
 }
+
+variable "alarm_prefix" {
+  type        = string
+  description = "String prefix for cloudwatch alarms. (Optional)"
+  default     = "alarm"
+}
