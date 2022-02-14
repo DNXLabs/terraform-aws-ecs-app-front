@@ -38,7 +38,7 @@ If you have specified cloudfront_default_certificate, TLSv1 must be specified.
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.0 |
+| terraform | >= 0.12.31 |
 
 ## Providers
 
