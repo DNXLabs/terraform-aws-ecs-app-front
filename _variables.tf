@@ -116,3 +116,9 @@ variable "dynamic_ordered_cache_behavior" {
   type        = any
   default     = []
 }
+
+variable "alarm_prefix" {
+  type        = string
+  description = "String prefix for cloudwatch alarms. (Optional)"
+  default     = "alarm"
+}
