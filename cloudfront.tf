@@ -6,6 +6,10 @@ resource "aws_cloudfront_distribution" "default" {
   price_class         = "PriceClass_All"
   wait_for_deployment = false
 
+  depends_on = [aws_wafv2_web_acl.waf_cloudfront]
+
+  web_acl_id = var.waf_cloudfront_enable ? aws_wafv2_web_acl.waf_cloudfront[0].arn : null
+
   origin {
     domain_name = var.alb_dns_name
     origin_id   = "default"
@@ -166,5 +170,4 @@ resource "aws_cloudfront_distribution" "default" {
     }
   }
 
-  web_acl_id = var.cloudfront_web_acl_id != "" ? var.cloudfront_web_acl_id : ""
 }
