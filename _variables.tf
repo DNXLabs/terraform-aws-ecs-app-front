@@ -149,6 +149,6 @@ variable "wafv2_rate_limit_rule" {
 
 variable "web_acl_id" {
   type           = string
-  desdescription = "Web ACL ARN for Cloudfront distribution"
+  description = "Web ACL ARN for Cloudfront distribution"
   default        = null
 }
