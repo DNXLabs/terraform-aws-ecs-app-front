@@ -148,7 +148,7 @@ variable "wafv2_rate_limit_rule" {
 }
 
 variable "web_acl_id" {
-  type           = string
+  type        = string
   description = "Web ACL ARN for Cloudfront distribution"
-  default        = null
+  default     = null
 }
