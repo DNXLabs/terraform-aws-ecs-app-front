@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_metric_alarm" "cloudfront_500_errors" {
-  count    = length(var.alarm_sns_topics_us) > 0 && var.alarm_cloudfront_500_errors_threshold != 0 ? 1 : 0
+  count = length(var.alarm_sns_topics_us) > 0 && var.alarm_cloudfront_500_errors_threshold != 0 ? 1 : 0
 
   alarm_name                = try(data.aws_iam_account_alias.current[0].account_alias, "${var.alarm_prefix}-ecs-${var.name}-cloudfront-500-errors")
   comparison_operator       = "GreaterThanOrEqualToThreshold"

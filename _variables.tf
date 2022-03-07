@@ -123,6 +123,12 @@ variable "alarm_prefix" {
   default     = "alarm"
 }
 
+variable "waf_cloudfront_enable" {
+  type        = bool
+  description = "Enable WAF for Cloudfront distribution"
+  default     = false
+}
+
 variable "wafv2_managed_rule_groups" {
   type        = list(string)
   default     = ["AWSManagedRulesCommonRuleSet"]
@@ -142,6 +148,7 @@ variable "wafv2_rate_limit_rule" {
 }
 
 variable "web_acl_id" {
-  type    = string
-  default = null
+  type           = string
+  desdescription = "Web ACL ARN for Cloudfront distribution"
+  default        = null
 }
