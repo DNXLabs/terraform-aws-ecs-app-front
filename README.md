@@ -38,14 +38,14 @@ If you have specified cloudfront_default_certificate, TLSv1 must be specified.
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.20 |
+| terraform | >= 0.13.0 |
+| aws | >= 2.7.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
-| aws.us-east-1 | n/a |
+| aws | >= 2.7.0 |
 
 ## Inputs
 
@@ -74,6 +74,11 @@ If you have specified cloudfront_default_certificate, TLSv1 must be specified.
 | name | Name of your ECS service | `any` | n/a | yes |
 | restriction\_location | The ISO 3166-1-alpha-2 codes for which you want CloudFront either to distribute your content (whitelist) or not distribute your content (blacklist) | `list(any)` | `[]` | no |
 | restriction\_type | The restriction type of your CloudFront distribution geolocation restriction. Options include none, whitelist, blacklist | `string` | `"none"` | no |
+| waf\_cloudfront\_enable | Enable WAF for Cloudfront distribution | `bool` | `false` | no |
+| wafv2\_managed\_block\_rule\_groups | List of WAF V2 managed rule groups, set to block | `list(string)` | `[]` | no |
+| wafv2\_managed\_rule\_groups | List of WAF V2 managed rule groups, set to count | `list(string)` | <pre>[<br>  "AWSManagedRulesCommonRuleSet"<br>]</pre> | no |
+| wafv2\_rate\_limit\_rule | The limit on requests per 5-minute period for a single originating IP address (leave 0 to disable) | `number` | `0` | no |
+| web\_acl\_id | Web ACL ARN for Cloudfront distribution | `string` | `null` | no |
 
 ## Outputs
 
