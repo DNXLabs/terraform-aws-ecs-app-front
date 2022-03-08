@@ -122,3 +122,33 @@ variable "alarm_prefix" {
   description = "String prefix for cloudwatch alarms. (Optional)"
   default     = "alarm"
 }
+
+variable "waf_cloudfront_enable" {
+  type        = bool
+  description = "Enable WAF for Cloudfront distribution"
+  default     = false
+}
+
+variable "wafv2_managed_rule_groups" {
+  type        = list(string)
+  default     = ["AWSManagedRulesCommonRuleSet"]
+  description = "List of WAF V2 managed rule groups, set to count"
+}
+
+variable "wafv2_managed_block_rule_groups" {
+  type        = list(string)
+  default     = []
+  description = "List of WAF V2 managed rule groups, set to block"
+}
+
+variable "wafv2_rate_limit_rule" {
+  type        = number
+  default     = 0
+  description = "The limit on requests per 5-minute period for a single originating IP address (leave 0 to disable)"
+}
+
+variable "web_acl_id" {
+  type        = string
+  description = "Web ACL ARN for Cloudfront distribution"
+  default     = null
+}
