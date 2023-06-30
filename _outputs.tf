@@ -12,3 +12,8 @@ output "cloudfront_zone_id" {
   description = "The Zone ID of the CloudFront Distribution (use for DNS Alias)."
   value       = aws_cloudfront_distribution.default.hosted_zone_id
 }
+
+output "aws_cloudfront_origin_access_identity" {
+  description = "Define cloudfront origin access identity" 
+  value = aws_cloudfront_origin_access_identity.default.*
+}
