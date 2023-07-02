@@ -12,12 +12,12 @@ variable "hostnames" {
 
 variable "dynamic_custom_error_response"{
   description = "One or more custom error response elements (multiples allowed)"
- type = list(object({
-        error_code         = number
-        response_code      = number
-        response_page_path = string
+  type = list(object({
+        error_code         = optional(number)
+        response_code      = optional(number)
+        response_page_path = optional(string)
       }))
-  default = []
+  default     = []
 }
 
 variable "hostname_create" {
