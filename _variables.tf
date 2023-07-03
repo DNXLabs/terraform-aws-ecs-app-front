@@ -10,14 +10,14 @@ variable "hostnames" {
   description = "Hostnames to create DNS record for this app that the cloudfront distribution will accept"
 }
 
-variable "dynamic_custom_error_response"{
+variable "dynamic_custom_error_response" {
   description = "One or more custom error response elements (multiples allowed)"
   type = list(object({
-        error_code         = optional(number)
-        response_code      = optional(number)
-        response_page_path = optional(string)
-      }))
-  default     = []
+    error_code         = optional(number)
+    response_code      = optional(number)
+    response_page_path = optional(string)
+  }))
+  default = []
 }
 
 variable "hostname_create" {

@@ -1,6 +1,6 @@
 resource "aws_cloudfront_origin_access_identity" "default" {
-  for_each = {for i in var.dynamic_custom_origin_config : i.origin_id => i if i.s3  }
-  comment = "${each.value.origin_id}-s3"
+  for_each = { for i in var.dynamic_custom_origin_config : i.origin_id => i if i.s3 }
+  comment  = "${each.value.origin_id}-s3"
 }
 
 resource "aws_cloudfront_distribution" "default" {
@@ -167,8 +167,8 @@ resource "aws_cloudfront_distribution" "default" {
     ssl_support_method             = var.certificate_arn == null && var.iam_certificate_id == null ? null : "sni-only"
     minimum_protocol_version       = var.certificate_arn == null && var.iam_certificate_id == null ? "TLSv1.2_2018" : var.minimum_protocol_version
   }
-  
- dynamic "custom_error_response" {
+
+  dynamic "custom_error_response" {
     for_each = var.dynamic_custom_error_response
     iterator = error_response
     content {
