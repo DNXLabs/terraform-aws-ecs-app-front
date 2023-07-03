@@ -63,7 +63,7 @@ If you have specified cloudfront_default_certificate, TLSv1 must be specified.
 | cloudfront\_origin\_read\_timeout | The amount of time, in seconds, that CloudFront waits for a response from a custom origin. The value applies both to the time that CloudFront waits for an initial response and the time that CloudFront waits for each subsequent packet. Valid values are from 4 to 60 seconds. | `number` | `30` | no |
 | cloudfront\_web\_acl\_id | Optional web acl (WAF) to attach to CloudFront | `string` | `""` | no |
 | cluster\_name | Name of existing ECS Cluster to deploy this app to | `any` | n/a | yes |
-| dynamic\_custom\_error\_response | One or more custom error response elements (multiples allowed) | <pre>list(object({<br>        error_code         = optional(number)<br>        response_code      = optional(number)<br>        response_page_path = optional(string)<br>      }))</pre> | `[]` | no |
+| dynamic\_custom\_error\_response | One or more custom error response elements (multiples allowed) | <pre>list(object({<br>    error_code         = optional(number)<br>    response_code      = optional(number)<br>    response_page_path = optional(string)<br>  }))</pre> | `[]` | no |
 | dynamic\_custom\_origin\_config | Configuration for the custom origin config to be used in dynamic block | `any` | `[]` | no |
 | dynamic\_ordered\_cache\_behavior | Ordered Cache Behaviors to be used in dynamic block | `any` | `[]` | no |
 | hosted\_zone | Existing Hosted Zone domain to add hostnames as DNS records | `any` | n/a | yes |
