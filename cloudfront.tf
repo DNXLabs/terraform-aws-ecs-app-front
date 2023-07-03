@@ -1,3 +1,8 @@
+resource "aws_cloudfront_origin_access_identity" "default" {
+  for_each = { for i in var.dynamic_custom_origin_config : i.origin_id => i if i.s3 }
+  comment  = "${each.value.origin_id}-s3"
+}
+
 resource "aws_cloudfront_distribution" "default" {
   enabled             = true
   is_ipv6_enabled     = true
@@ -42,7 +47,6 @@ resource "aws_cloudfront_distribution" "default" {
       origin_keepalive_timeout = i.origin_keepalive_timeout
       origin_ssl_protocols     = lookup(i, "origin_ssl_protocols", ["SSLv3", "TLSv1.1", "TLSv1.2", "TLSv1"])
       custom_header            = lookup(i, "custom_header", null)
-      origin_access_identity   = lookup(i, "origin_access_identity", "")
     }]
 
     content {
@@ -66,10 +70,11 @@ resource "aws_cloudfront_distribution" "default" {
         value = var.alb_cloudfront_key
       }
 
+
       dynamic "s3_origin_config" {
         for_each = origin.value.s3 == true ? [1] : []
         content {
-          origin_access_identity = origin.value.origin_access_identity
+          origin_access_identity = aws_cloudfront_origin_access_identity.default[origin.value.origin_id].cloudfront_access_identity_path
         }
       }
 
@@ -161,6 +166,16 @@ resource "aws_cloudfront_distribution" "default" {
     cloudfront_default_certificate = var.certificate_arn == null && var.iam_certificate_id == null ? true : false
     ssl_support_method             = var.certificate_arn == null && var.iam_certificate_id == null ? null : "sni-only"
     minimum_protocol_version       = var.certificate_arn == null && var.iam_certificate_id == null ? "TLSv1.2_2018" : var.minimum_protocol_version
+  }
+
+  dynamic "custom_error_response" {
+    for_each = var.dynamic_custom_error_response
+    iterator = error_response
+    content {
+      error_code         = error_response.value.error_code
+      response_code      = error_response.value.response_code
+      response_page_path = error_response.value.response_page_path
+    }
   }
 
   restrictions {
