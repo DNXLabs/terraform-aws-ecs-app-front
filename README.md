@@ -61,8 +61,6 @@ If you have specified cloudfront_default_certificate, TLSv1 must be specified.
 | cloudfront\_logging\_prefix | Logging prefix | `string` | `""` | no |
 | cloudfront\_origin\_keepalive\_timeout | The amount of time, in seconds, that CloudFront maintains an idle connection with a custom origin server before closing the connection. Valid values are from 1 to 60 seconds. | `number` | `5` | no |
 | cloudfront\_origin\_read\_timeout | The amount of time, in seconds, that CloudFront waits for a response from a custom origin. The value applies both to the time that CloudFront waits for an initial response and the time that CloudFront waits for each subsequent packet. Valid values are from 4 to 60 seconds. | `number` | `30` | no |
-| cloudfront\_web\_acl\_id | Optional web acl (WAF) to attach to CloudFront | `string` | `""` | no |
-| cluster\_name | Name of existing ECS Cluster to deploy this app to | `string` | n/a | yes |
 | dynamic\_custom\_error\_response | One or more custom error response elements (multiples allowed) | <pre>list(object({<br>    error_code         = optional(number)<br>    response_code      = optional(number)<br>    response_page_path = optional(string)<br>  }))</pre> | `[]` | no |
 | dynamic\_custom\_origin\_config | Configuration for the custom origin config to be used in dynamic block | `any` | `[]` | no |
 | dynamic\_ordered\_cache\_behavior | Ordered Cache Behaviors to be used in dynamic block | `any` | `[]` | no |
@@ -79,7 +77,6 @@ If you have specified cloudfront_default_certificate, TLSv1 must be specified.
 | wafv2\_managed\_block\_rule\_groups | List of WAF V2 managed rule groups, set to block | `list(string)` | `[]` | no |
 | wafv2\_managed\_rule\_groups | List of WAF V2 managed rule groups, set to count | `list(string)` | <pre>[<br>  "AWSManagedRulesCommonRuleSet"<br>]</pre> | no |
 | wafv2\_rate\_limit\_rule | The limit on requests per 5-minute period for a single originating IP address (leave 0 to disable) | `number` | `0` | no |
-| web\_acl\_id | Web ACL ARN for Cloudfront distribution | `string` | `null` | no |
 
 ## Outputs
 
