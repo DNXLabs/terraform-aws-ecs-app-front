@@ -162,3 +162,9 @@ variable "web_acl_id" {
   description = "Web ACL ARN for Cloudfront distribution"
   default     = null
 }
+
+variable "record_type" {
+  type        = string
+  description = "Type of the record to create on Route53"
+  default     = "CNAME"
+}
