@@ -3,11 +3,6 @@ variable "name" {
   type        = string
 }
 
-variable "cluster_name" {
-  description = "Name of existing ECS Cluster to deploy this app to"
-  type        = string
-}
-
 variable "hostnames" {
   description = "Hostnames to create DNS record for this app that the cloudfront distribution will accept"
   type        = list(string)
@@ -46,12 +41,6 @@ variable "alb_dns_name" {
 
 variable "certificate_arn" {
   description = "Certificate for this app to use in CloudFront (US), must cover `hostname`."
-  type        = string
-}
-
-variable "cloudfront_web_acl_id" {
-  default     = ""
-  description = "Optional web acl (WAF) to attach to CloudFront"
   type        = string
 }
 
@@ -169,12 +158,6 @@ variable "wafv2_rate_limit_rule" {
   type        = number
   default     = 0
   description = "The limit on requests per 5-minute period for a single originating IP address (leave 0 to disable)"
-}
-
-variable "web_acl_id" {
-  type        = string
-  description = "Web ACL ARN for Cloudfront distribution"
-  default     = null
 }
 
 variable "record_type" {
