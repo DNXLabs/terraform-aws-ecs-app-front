@@ -15,5 +15,5 @@ output "cloudfront_zone_id" {
 
 output "aws_cloudfront_origin_access_identity" {
   description = "Define cloudfront origin access identity"
-  value       = aws_cloudfront_origin_access_identity.default.*
+  value       = aws_cloudfront_origin_access_identity.default[*]
 }

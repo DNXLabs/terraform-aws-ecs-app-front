@@ -4,8 +4,6 @@ resource "aws_wafv2_web_acl" "waf_cloudfront" {
   description = "WAF managed rules for Cloudfront"
   scope       = "CLOUDFRONT"
 
-
-
   default_action {
     allow {}
   }

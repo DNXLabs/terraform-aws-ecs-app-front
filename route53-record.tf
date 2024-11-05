@@ -7,7 +7,7 @@ resource "aws_route53_record" "hostname" {
 
   zone_id = data.aws_route53_zone.selected.zone_id
   name    = var.hostnames[count.index]
-  type    = "CNAME"
+  type    = var.record_type
   ttl     = "300"
-  records = [element(aws_cloudfront_distribution.default.*.domain_name, 0)]
+  records = [element(aws_cloudfront_distribution.default[*].domain_name, 0)]
 }
