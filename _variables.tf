@@ -165,3 +165,39 @@ variable "record_type" {
   description = "Type of the record to create on Route53"
   default     = "CNAME"
 }
+########
+variable "create_cloudfront_function" {
+  description = "If true, create and publish a CloudFront Function based on provided code"
+  type        = bool
+  default     = false
+}
+
+variable "cloudfront_function_name" {
+  description = "Name of the CloudFront Function"
+  type        = string
+  default     = null
+}
+
+variable "cloudfront_function_code" {
+  description = "JavaScript code (cloudfront-js-2.0) of the CloudFront Function"
+  type        = string
+  default     = null
+}
+
+variable "cloudfront_function_event_type" {
+  description = "Event type to associate with the function: viewer-request or viewer-response"
+  type        = string
+  default     = "viewer-request"
+
+  validation {
+    condition     = var.cloudfront_function_event_type == "viewer-request" || var.cloudfront_function_event_type == "viewer-response"
+    error_message = "cloudfront_function_event_type must be 'viewer-request' or 'viewer-response'."
+  }
+}
+
+variable "cloudfront_function_arn" {
+  description = "ARN of an existing CloudFront Function (use this if create_cloudfront_function=false)"
+  type        = string
+  default     = null
+}
+

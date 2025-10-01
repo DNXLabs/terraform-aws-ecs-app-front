@@ -58,10 +58,15 @@ If you have specified cloudfront_default_certificate, TLSv1 must be specified.
 | alb\_dns\_name | ALB DNS Name that CloudFront will point as origin | `string` | n/a | yes |
 | certificate\_arn | Certificate for this app to use in CloudFront (US), must cover `hostname`. | `string` | n/a | yes |
 | cloudfront\_forward\_headers | Headers to forward to origin from CloudFront | `list(string)` | <pre>[<br>  "*"<br>]</pre> | no |
+| cloudfront\_function\_arn | ARN of an existing CloudFront Function (use this if create\_cloudfront\_function=false) | `string` | `null` | no |
+| cloudfront\_function\_code | JavaScript code (cloudfront-js-2.0) of the CloudFront Function | `string` | `null` | no |
+| cloudfront\_function\_event\_type | Event type to associate with the function: viewer-request or viewer-response | `string` | `"viewer-request"` | no |
+| cloudfront\_function\_name | Name of the CloudFront Function | `string` | `null` | no |
 | cloudfront\_logging\_bucket | Bucket to store logs from app | `string` | `null` | no |
 | cloudfront\_logging\_prefix | Logging prefix | `string` | `""` | no |
 | cloudfront\_origin\_keepalive\_timeout | The amount of time, in seconds, that CloudFront maintains an idle connection with a custom origin server before closing the connection. Valid values are from 1 to 60 seconds. | `number` | `5` | no |
 | cloudfront\_origin\_read\_timeout | The amount of time, in seconds, that CloudFront waits for a response from a custom origin. The value applies both to the time that CloudFront waits for an initial response and the time that CloudFront waits for each subsequent packet. Valid values are from 4 to 60 seconds. | `number` | `30` | no |
+| create\_cloudfront\_function | If true, create and publish a CloudFront Function based on provided code | `bool` | `false` | no |
 | dynamic\_custom\_error\_response | One or more custom error response elements (multiples allowed) | <pre>list(object({<br>    error_code         = optional(number)<br>    response_code      = optional(number)<br>    response_page_path = optional(string)<br>  }))</pre> | `[]` | no |
 | dynamic\_custom\_origin\_config | Configuration for the custom origin config to be used in dynamic block | `any` | `[]` | no |
 | dynamic\_ordered\_cache\_behavior | Ordered Cache Behaviors to be used in dynamic block | `any` | `[]` | no |
