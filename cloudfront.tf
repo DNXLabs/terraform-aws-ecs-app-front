@@ -118,6 +118,14 @@ resource "aws_cloudfront_distribution" "default" {
       }
     }
 
+    dynamic "function_association" {
+      for_each = local.resolved_cloudfront_function_arn == null ? [] : [1]
+      content {
+        event_type   = var.cloudfront_function_event_type
+        function_arn = local.resolved_cloudfront_function_arn
+      }
+    }
+
     viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0
     default_ttl            = 3600
@@ -185,4 +193,19 @@ resource "aws_cloudfront_distribution" "default" {
     }
   }
 
+}
+
+locals {
+  resolved_cloudfront_function_arn = var.create_cloudfront_function ? (
+    try(aws_cloudfront_function.this[0].arn, null)
+  ) : var.cloudfront_function_arn
+}
+
+resource "aws_cloudfront_function" "this" {
+  count   = var.create_cloudfront_function ? 1 : 0
+  name    = var.cloudfront_function_name
+  runtime = "cloudfront-js-2.0"
+  comment = "Managed by terraform-aws-ecs-app-front"
+  publish = true
+  code    = var.cloudfront_function_code
 }
