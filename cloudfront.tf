@@ -13,7 +13,7 @@ resource "aws_cloudfront_distribution" "default" {
 
   depends_on = [aws_wafv2_web_acl.waf_cloudfront]
 
-  web_acl_id = var.waf_cloudfront_enable ? aws_wafv2_web_acl.waf_cloudfront[0].arn : null
+  web_acl_id = var.waf_cloudfront_enable ? (var.cloudfront_web_acl_id != null ? var.cloudfront_web_acl_id : aws_wafv2_web_acl.waf_cloudfront[0].arn) : null
 
   origin {
     domain_name = var.alb_dns_name

@@ -3,6 +3,11 @@ variable "name" {
   type        = string
 }
 
+variable "cloudfront_web_acl_id" {
+  default     = ""
+  description = "Optional web acl (WAF) to attach to CloudFront"
+}
+
 variable "hostnames" {
   description = "Hostnames to create DNS record for this app that the cloudfront distribution will accept"
   type        = list(string)
