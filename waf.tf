@@ -1,5 +1,5 @@
 resource "aws_wafv2_web_acl" "waf_cloudfront" {
-  count       = var.waf_cloudfront_enable ? 1 : 0
+  count = var.waf_cloudfront_enable && var.cloudfront_web_acl_id == null ? 1 : 0
   name        = "waf-cloudfront-${var.name}"
   description = "WAF managed rules for Cloudfront"
   scope       = "CLOUDFRONT"
