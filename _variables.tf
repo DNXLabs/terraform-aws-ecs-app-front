@@ -206,3 +206,9 @@ variable "cloudfront_function_arn" {
   default     = null
 }
 
+variable "cloudfront_origin_ssl_protocols" {
+  description = "The SSL/TLS protocols that CloudFront can use when connecting to the origin."
+  type        = list(string)
+  default     = ["SSLv3", "TLSv1.1", "TLSv1.2", "TLSv1"]
+}
+
